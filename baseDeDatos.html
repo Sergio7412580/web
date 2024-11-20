@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Datos de Contactos</title>
+</head>
+<body>
+
+<h2>Mensajes de Contacto</h2>
+<div id="mensajeContainer"></div>
+
+<script>
+
+function verificarContraseña() {
+    const contraseña = prompt("Por favor, ingresa la contraseña:");
+
+    if (contraseña !== "sergiomendoza") { 
+        alert("Contraseña incorrecta.");
+        window.location.href = "index.html"; 
+    } else {
+        mostrarMensajes();
+    }
+}
+
+// Función para mostrar los mensajes de los envíos
+function mostrarMensajes() {
+    const mensajes = JSON.parse(localStorage.getItem("envios")) || [];
+    const container = document.getElementById("mensajeContainer");
+
+    if (mensajes.length === 0) {
+        container.innerHTML = "<p>No hay mensajes enviados.</p>";
+    } else {
+        mensajes.forEach(envio => {
+            const mensajeHTML = `
+                <div>
+                    <h3>Nombre: ${envio.nombre}</h3>
+                    <p>Email: ${envio.email}</p>
+                    <p>Mensaje: ${envio.mensaje}</p>
+                    <p>Fecha: ${new Date(envio.fecha).toLocaleString()}</p>
+                    <hr>
+                </div>
+            `;
+            container.innerHTML += mensajeHTML;
+        });
+    }
+}
+
+// Llamar a la función de verificación al cargar la página
+verificarContraseña();
+</script>
+
+</body>
+</html>
