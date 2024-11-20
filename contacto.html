@@ -71,9 +71,10 @@
         </div>
     </section>
     <!--Sección de formulario-->
-    <main class="py-1"> 
+    <main class="py-1">
         <div class="container">
             <div class="row">
+                <!-- Formulario de Contacto -->
                 <div class="col-md-8">
                     <h2 class="mb-2">Formulario de Contacto</h2>
                     <form id="contactForm" action="#">
@@ -101,7 +102,29 @@
                                 <button type="reset" class="btn btn-secondary">Limpiar</button>
                             </div>
                         </div>
-                    </form>
+                    </form>                
+                </div>
+                <!-- Detalles de Contacto -->
+                <div class="col-md-4">
+                    <h2>Detalles de Contacto</h2>
+                    <pre>
+    Sergio Mendoza Mamani 
+    📱 Celular: +591 60407865  
+    Correo: sergiomendozamamani1@gmail.com
+                    </pre>                        
+                    <div class="col-md-8 offset-md-4"></div>
+                            <a href="baseDeDatos.html" class="btn btn-info">BASE DE DATOS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+                    <!-- Botón agregado para enlazar a baseDeDatos.html -->
+                    <div class="form-group row mt-3">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,7 +157,7 @@
     
         // Guardar el objeto en localStorage
         saveEnvioData(envio);
-        
+    
         // Limpiar el formulario
         document.getElementById("contactForm").reset();
     
@@ -171,13 +194,7 @@
     }
     </script>
     
-                </div>
-                <div class="col-md-4">
-                    <h3>Detalles de Contacto</h3>
-                    <pre>Detalles de Contacto
-Sergio Mendoza Mamani 
-📱 Celular: +591 60407865  
-Correo: sergiomendozamamani1@gmail.com</pre>
+    
                 </div>
 
 
