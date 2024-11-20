@@ -71,12 +71,12 @@
         </div>
     </section>
     <!--Sección de formulario-->
-    <main class="py-1">
+    <main class="py-1"> 
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <h2 class="mb-2">Formulario de Contacto</h2>
-                    <form action="#">
+                    <form id="contactForm" action="#">
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label">Nombre</label>
                             <div class="col-md-8">
@@ -102,6 +102,75 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();  // Evita que el formulario se envíe de la manera tradicional.
+    
+        // Obtener los valores del formulario
+        let nombre = document.getElementById("nombre").value;
+        let email = document.getElementById("email").value;
+        let mensaje = document.getElementById("mensaje").value;
+    
+        // Obtener la fecha y hora actual
+        let now = new Date();
+        let hour = now.getHours();
+        let month = now.getMonth() + 1; // Los meses van de 0 a 11, por eso sumamos 1
+        let day = now.getDate();
+    
+        // Crear un objeto con los datos del envío
+        let envio = {
+            nombre: nombre,
+            email: email,
+            mensaje: mensaje,
+            hora: hour,
+            mes: month,
+            fecha: now.toISOString()  // Para almacenar la fecha en un formato estándar
+        };
+    
+        // Guardar el objeto en localStorage
+        saveEnvioData(envio);
+        
+        // Limpiar el formulario
+        document.getElementById("contactForm").reset();
+    
+        alert("¡Gracias por enviar tu mensaje!");
+    });
+    
+    // Función para guardar los datos del envío
+    function saveEnvioData(envio) {
+        let envioData = JSON.parse(localStorage.getItem("envios")) || [];
+    
+        // Acumular los envíos por hora y mes
+        let horaEnvios = JSON.parse(localStorage.getItem("enviosPorHora")) || {};
+        let mesEnvios = JSON.parse(localStorage.getItem("enviosPorMes")) || {};
+    
+        // Acumular por hora
+        if (!horaEnvios[envio.hora]) {
+            horaEnvios[envio.hora] = 0;
+        }
+        horaEnvios[envio.hora]++;
+    
+        // Acumular por mes
+        if (!mesEnvios[envio.mes]) {
+            mesEnvios[envio.mes] = 0;
+        }
+        mesEnvios[envio.mes]++;
+    
+        // Guardar los contadores actualizados en localStorage
+        localStorage.setItem("enviosPorHora", JSON.stringify(horaEnvios));
+        localStorage.setItem("enviosPorMes", JSON.stringify(mesEnvios));
+    
+        // Añadir el nuevo envío al array de envíos
+        envioData.push(envio);
+        localStorage.setItem("envios", JSON.stringify(envioData));
+    }
+    </script>
+    
                 </div>
                 <div class="col-md-4">
                     <h3>Detalles de Contacto</h3>
